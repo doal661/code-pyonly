@@ -1,7 +1,7 @@
 print("Hello")
 
-globalx = 4
+x = 4
 print(x)
 
 input_data = input()
-print(input_data)
+print(input_data*2)
