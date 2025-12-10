@@ -45,7 +45,7 @@ def argv_length_check():
         # print("here!") 이걸 통해서 len() 잘못쓴거 파악함.
         return False
     else: # 이것도 무사히 넘어갔음.
-        input_month = int(sys.argv[1])
+        input_month = int(sys.argv[1]) # 대입이 안 이뤄지는데, 아마 스코프가 로컬이라 그런 거 같음.
         input_end_of_date = int(sys.argv[2])
         input_start_of_week = sys.argv[3] # 달력의 영어가 3글자인 걸 이용해서 터미널 입력을 3글자 문자열로만 받음
         return True
@@ -117,7 +117,7 @@ def print_to_dates_on_one_month(month, date_of_end):
 if __name__ == "__main__":
     can_run_it = argv_length_check()
     if can_run_it == True:
-        print_to_dates_on_one_month(input_month, input_end_of_date)
+        print_to_dates_on_one_month(int(sys.argv[1]), int(sys.argv[2])) # 함수에서 대입하지 말고 직접 대입해야 해결되는듯 ㅇㅇ
     else:
         print("매개변수 다 넣으라니까?")
     # print("y") __main__ 확인용
