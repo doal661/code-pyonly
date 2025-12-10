@@ -1,6 +1,7 @@
-# Using obsidian as checkbox
+# Using obsidian as checkbox in TERMINAL
 import sys
 
+## 터미널로 쓸거면
 input_month = int(sys.argv[1])
 input_end_of_date = int(sys.argv[2])
 
@@ -39,6 +40,8 @@ def print_to_dates_on_one_month(month, date_of_end):
     date_counter = 1
     while date_counter <= date_of_end:
         print("- [ ] "+str(month)+"월 "+str(date_counter)+"일 : ")
+        print("") # 터미널로 쓸 경우에만 활성화
+        # vscodium의 OUTPUT으로 사용할 때에는 하지 않아도 엔터키 반영이 되기 때문
         date_counter = date_counter + 1
 
 # print_to_dates_on_one_month(3,31)
