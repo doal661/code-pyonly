@@ -1,11 +1,6 @@
 # Using obsidian as checkbox in TERMINAL
 import sys
 
-## 터미널로 쓸거면
-input_month = int(sys.argv[1])
-input_end_of_date = int(sys.argv[2])
-
-
 # 매개변수로 돌아가는 프로그램을 매개변수 없이 돌리면 아예 sys.argv[1] 자체를 인식하지 못해서 
 # if (sys.argv[1] == None):
 #        ~~~~~~~~^^^
@@ -36,18 +31,56 @@ input_end_of_date = int(sys.argv[2])
 # finally:
 #     sys.argv[2] = 0
 
+## 터미널로 쓸거면
+input_month = int(sys.argv[1])
+input_end_of_date = int(sys.argv[2])
+input_end_of_week = sys.argv[3] # 달력의 영어가 3글자인 걸 이용해서 터미널 입력을 3글자 문자열로만 받음
+
+
+iterate_seven_days = ["sunday", "monday", "tuesday", "wendsday", "thursday", "friday", "saturday"] # 이건 7개라 하드코딩해도 문제없음.
+
+# 카운트를 위해 사용될 숫자와의 매칭을 위하여 2차원 배열을 쓴다면?
+iterate_seven_days_list = [
+    ["sun", "sunday", 0],
+    ["mon", "monday", 1],
+    ["tue", "tuesday", 2],
+    ["wen", "wendsday", 3],
+    ["thu", "thursday", 4],
+    ["fri", "friday", 5],
+    ["sat", "saturday", 6]
+]
+
+# 아니면 2개만 매칭되는걸 이용해서 2차원배열 말고 딕셔너리로 퉁친다면?
+# 라고 세번째 매개변수 고려하기 전까진 생각했었다.
+dict_of_interate_seven_days = {
+    "sun": 0,
+    "mon": 1,
+    "tue": 2,
+    "wed": 3,
+    "thu": 4,
+    "fri":5,
+    "sat": 6,
+    # 숫자로 관리하면서 '인쇄될때만' 필요한 문자열을 관리하자는 의도. 얐으나
+    # 터미널 입력을 3자리 문자열로 받기로 했으니...
+}
+
 def print_to_dates_on_one_month(month, date_of_end):
     date_counter = 1
+    week_counter = ""
     while date_counter <= date_of_end:
-        print("- [ ] "+str(month)+"월 "+str(date_counter)+"일 : ")
+        print("- [ ] "+str(month)+"월 "+str(date_counter)+"일 " + str(iterate_seven_days_list[0][0]))
         print("") # 터미널로 쓸 경우에만 활성화
         # vscodium의 OUTPUT으로 사용할 때에는 하지 않아도 엔터키 반영이 되기 때문
         date_counter = date_counter + 1
 
 # print_to_dates_on_one_month(3,31)
-print_to_dates_on_one_month(input_month, input_end_of_date)
+
 
 
 # 불필요하니까 일단 주석처리
 # print(sys.argv[1])
 # print(sys.argv[2])
+
+if __name__ == "__main__":
+    print_to_dates_on_one_month(input_month, input_end_of_date)
+    print("y")
