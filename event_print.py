@@ -33,13 +33,23 @@ import sys
 
 ## 터미널로 쓸거면
 # if sys.argv[1] == None: # 입력이 진짜로 없으면 인터프리터는 이 부분에서 에러를 냄.
-if len(sys.argv) < 3: # 존나 잘먹힌다. 앞으로는 타입체크 이전에 길이체크부터 해야 out of range 오류가 안 날듯.
-    input_month = 0
-    input_end_of_date = -55
-else: # 이것도 무사히 넘어갔음.
-    input_month = int(sys.argv[1])
-    input_end_of_date = int(sys.argv[2])
-    input_start_of_week = sys.argv[3] # 달력의 영어가 3글자인 걸 이용해서 터미널 입력을 3글자 문자열로만 받음
+
+# 전역변수 초기화
+input_month = -9
+input_end_of_date = -55
+
+def argv_length_check():
+    if len(sys.argv) != 4: # 존나 잘먹힌다. 앞으로는 타입체크 이전에 길이체크부터 해야 out of range 오류가 안 날듯.
+        input_month = 0
+        input_end_of_date = -55
+        # print("here!") 이걸 통해서 len() 잘못쓴거 파악함.
+        return False
+    else: # 이것도 무사히 넘어갔음.
+        input_month = int(sys.argv[1])
+        input_end_of_date = int(sys.argv[2])
+        input_start_of_week = sys.argv[3] # 달력의 영어가 3글자인 걸 이용해서 터미널 입력을 3글자 문자열로만 받음
+        return True
+    return False
 
 
 iterate_seven_days = ["sunday", "monday", "tuesday", "wendsday", "thursday", "friday", "saturday"] # 이건 7개라 하드코딩해도 문제없음.
@@ -105,5 +115,9 @@ def print_to_dates_on_one_month(month, date_of_end):
 # print(sys.argv[2])
 
 if __name__ == "__main__":
-    print_to_dates_on_one_month(input_month, input_end_of_date)
+    can_run_it = argv_length_check()
+    if can_run_it == True:
+        print_to_dates_on_one_month(input_month, input_end_of_date)
+    else:
+        print("매개변수 다 넣으라니까?")
     # print("y") __main__ 확인용
