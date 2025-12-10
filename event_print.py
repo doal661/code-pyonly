@@ -68,6 +68,22 @@ def print_to_dates_on_one_month(month, date_of_end):
     date_counter = 1
     if sys.argv[3] == "sun":
         week_counter = 0
+    elif sys.argv[3] == "mon":
+        week_counter = 1
+    elif sys.argv[3] == "tue":
+        week_counter = 2
+    elif sys.argv[3] == "wen":
+        week_counter = 3
+    elif sys.argv[3] == "thu":
+        week_counter = 4
+    elif sys.argv[3] == "fri":
+        week_counter = 5
+    elif sys.argv[3] == "sat":
+        week_counter = 6
+    else: # 요일을 받는 매개변수가 지정된 문자가 아닌 경우를 짚어주면서 스무스하게.
+        week_counter = 0
+        print("그런거 없다 이새기야 제대로 입력해라")
+        return
     while date_counter <= date_of_end:
         print("- [ ] "+str(month)+"월 "+str(date_counter)+"일 " + str(dict_of_interate_seven_days[int(week_counter)%7]))
         print("") # 터미널로 쓸 경우에만 활성화
@@ -85,4 +101,4 @@ def print_to_dates_on_one_month(month, date_of_end):
 
 if __name__ == "__main__":
     print_to_dates_on_one_month(input_month, input_end_of_date)
-    print("y")
+    # print("y") __main__ 확인용
