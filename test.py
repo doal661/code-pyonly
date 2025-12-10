@@ -1,6 +1,6 @@
 print("Hello")
 
-x = 4
+globalx = 4
 print(x)
 
 input_data = input()
