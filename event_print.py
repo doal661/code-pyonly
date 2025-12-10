@@ -34,7 +34,7 @@ import sys
 ## 터미널로 쓸거면
 input_month = int(sys.argv[1])
 input_end_of_date = int(sys.argv[2])
-input_end_of_week = sys.argv[3] # 달력의 영어가 3글자인 걸 이용해서 터미널 입력을 3글자 문자열로만 받음
+input_start_of_week = sys.argv[3] # 달력의 영어가 3글자인 걸 이용해서 터미널 입력을 3글자 문자열로만 받음
 
 
 iterate_seven_days = ["sunday", "monday", "tuesday", "wendsday", "thursday", "friday", "saturday"] # 이건 7개라 하드코딩해도 문제없음.
@@ -53,25 +53,27 @@ iterate_seven_days_list = [
 # 아니면 2개만 매칭되는걸 이용해서 2차원배열 말고 딕셔너리로 퉁친다면?
 # 라고 세번째 매개변수 고려하기 전까진 생각했었다.
 dict_of_interate_seven_days = {
-    "sun": 0,
-    "mon": 1,
-    "tue": 2,
-    "wed": 3,
-    "thu": 4,
-    "fri":5,
-    "sat": 6,
+    0: "sun",
+    1: "mon",
+    2: "tue",
+    3: "wed",
+    4: "thu",
+    5: "fri",
+    6: "sat",
     # 숫자로 관리하면서 '인쇄될때만' 필요한 문자열을 관리하자는 의도. 얐으나
     # 터미널 입력을 3자리 문자열로 받기로 했으니...
 }
 
 def print_to_dates_on_one_month(month, date_of_end):
     date_counter = 1
-    week_counter = ""
+    if sys.argv[3] == "sun":
+        week_counter = 0
     while date_counter <= date_of_end:
-        print("- [ ] "+str(month)+"월 "+str(date_counter)+"일 " + str(iterate_seven_days_list[0][0]))
+        print("- [ ] "+str(month)+"월 "+str(date_counter)+"일 " + str(dict_of_interate_seven_days[int(week_counter)%7]))
         print("") # 터미널로 쓸 경우에만 활성화
         # vscodium의 OUTPUT으로 사용할 때에는 하지 않아도 엔터키 반영이 되기 때문
         date_counter = date_counter + 1
+        week_counter = week_counter + 1
 
 # print_to_dates_on_one_month(3,31)
 
