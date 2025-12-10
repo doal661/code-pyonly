@@ -32,9 +32,14 @@ import sys
 #     sys.argv[2] = 0
 
 ## 터미널로 쓸거면
-input_month = int(sys.argv[1])
-input_end_of_date = int(sys.argv[2])
-input_start_of_week = sys.argv[3] # 달력의 영어가 3글자인 걸 이용해서 터미널 입력을 3글자 문자열로만 받음
+# if sys.argv[1] == None: # 입력이 진짜로 없으면 인터프리터는 이 부분에서 에러를 냄.
+if len(sys.argv) < 3: # 존나 잘먹힌다. 앞으로는 타입체크 이전에 길이체크부터 해야 out of range 오류가 안 날듯.
+    input_month = 0
+    input_end_of_date = -55
+else: # 이것도 무사히 넘어갔음.
+    input_month = int(sys.argv[1])
+    input_end_of_date = int(sys.argv[2])
+    input_start_of_week = sys.argv[3] # 달력의 영어가 3글자인 걸 이용해서 터미널 입력을 3글자 문자열로만 받음
 
 
 iterate_seven_days = ["sunday", "monday", "tuesday", "wendsday", "thursday", "friday", "saturday"] # 이건 7개라 하드코딩해도 문제없음.
@@ -80,12 +85,12 @@ def print_to_dates_on_one_month(month, date_of_end):
         week_counter = 5
     elif sys.argv[3] == "sat":
         week_counter = 6
-    else: # 요일을 받는 매개변수가 지정된 문자가 아닌 경우를 짚어주면서 스무스하게.
+    else: # 요일을 받는 매개변수가 지정된 문자가 아닌 경우를 짚어주면서 스무스하게 에러 처리.
         week_counter = 0
         print("그런거 없다 이새기야 제대로 입력해라")
         return
     while date_counter <= date_of_end:
-        print("- [ ] "+str(month)+"월 "+str(date_counter)+"일 " + str(dict_of_interate_seven_days[int(week_counter)%7]))
+        print("- [ ] "+str(month)+"월 "+str(date_counter)+"일 (" + str(dict_of_interate_seven_days[int(week_counter)%7]) + ") : ")
         print("") # 터미널로 쓸 경우에만 활성화
         # vscodium의 OUTPUT으로 사용할 때에는 하지 않아도 엔터키 반영이 되기 때문
         date_counter = date_counter + 1
