@@ -23,3 +23,16 @@ In this folder, only using python.
 
 그러나 추가 프로그래밍은 상황 따라서 왔다갔다 할 거임.
 
+
+----
+
+sudo apt install tcl tk
+
+Traceback (most recent call last):
+  File "/home/wfewj/code-pyonly/tktest.py", line 1, in <module>
+    import tkinter as tk # 또는 from tkinter import *
+    ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.14/tkinter/__init__.py", line 38, in <module>
+    import _tkinter # If this fails your Python may not be configured for Tk
+    ^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named '_tkinter'
